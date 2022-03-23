@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_color"
+    tools:context=".MainActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="59dp"
+            android:layout_marginBottom="60dp"
+            android:gravity="center"
+            android:text="Login Screen"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/emailNameText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/emailNameText"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_layout"
+            android:drawableStart="@drawable/ic_baseline_email"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="Enter a email"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:textColor="#F4EEEE"
+            android:textColorHint="#F4EEEE"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/passwordText"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_layout"
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textWebPassword"
+            android:paddingStart="20dp"
+            android:textColor="#F4EEEE"
+            android:textColorHint="#F4EEEE"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailNameText" />
+
+        <Button
+            android:id="@+id/signInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/edittext_layout"
+            android:text="Sign In"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

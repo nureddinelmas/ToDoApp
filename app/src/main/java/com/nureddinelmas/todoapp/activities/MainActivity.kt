@@ -1,11 +1,14 @@
-package com.nureddinelmas.todoapp
+package com.nureddinelmas.todoapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.nureddinelmas.todoapp.viewModel.MainViewModel
+import com.nureddinelmas.todoapp.MainViewModelFactory
 import com.nureddinelmas.todoapp.databinding.ActivityMainBinding
 import com.nureddinelmas.todoapp.model.Post
 import com.nureddinelmas.todoapp.repository.Repository
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.pushPost(myPost)
             viewModel.myResponse.observe(this, Observer { response ->
                 if(response.isSuccessful){
+                    Toast.makeText(this,"Succesfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     Log.d("!!!", response.body().toString())
@@ -47,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("!!!", response.message())
 
                 }else {
+                    Toast.makeText(this, "Unvalid password or username", Toast.LENGTH_LONG).show()
                     Log.d("!!!", "UnSuccess")
                 }
             })

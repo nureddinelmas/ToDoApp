@@ -1,4 +1,4 @@
-package com.nureddinelmas.todoapp
+package com.nureddinelmas.todoapp.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

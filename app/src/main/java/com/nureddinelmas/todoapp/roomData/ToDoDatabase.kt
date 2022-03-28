@@ -1,14 +1,12 @@
 package com.nureddinelmas.todoapp.roomData
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.nureddinelmas.todoapp.model.ToDo
 import com.nureddinelmas.todoapp.utils.Converter
-import com.nureddinelmas.todoapp.utils.TimestampConverter
 
 
 @Database(entities = [ToDo::class], version = 3, exportSchema = false)
@@ -43,5 +41,8 @@ abstract class ToDoDatabase : RoomDatabase(){
 
     }
 
+    fun destroyInstance() {
+        INSTANCE = null
+    }
 
 }

@@ -37,15 +37,11 @@ class MainActivity : AppCompatActivity() {
 
 
     fun signInClicked() {
+
         if (!isValidString(binding.emailNameText.text.toString())) {
             binding.emailNameText.error = "Not correct Email"
         } else {
-
-            val myPost = Post(
-                binding.emailNameText.text.toString(),
-                binding.passwordText.text.toString(),
-                token = ""
-            )
+            val myPost = Post(binding.emailNameText.text.toString(), binding.passwordText.text.toString(), token = "")
             // val myPost = Post("eve.holt@reqres.in", "cityslicka","")
             viewModel.pushPost(myPost)
             viewModel.myResponse.observe(this, Observer { response ->
@@ -62,13 +58,10 @@ class MainActivity : AppCompatActivity() {
                     Log.d("!!!", "UnSuccess")
                 }
             })
-            // }
         }
-
-
-
-
     }
+
+
     fun isValidString(str: String): Boolean {
         val validation = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +

@@ -1,16 +1,23 @@
 package com.nureddinelmas.todoapp.activities.fragment
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context.ALARM_SERVICE
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.nureddinelmas.todoapp.NotifierAlarm
 import com.nureddinelmas.todoapp.R
 import com.nureddinelmas.todoapp.model.ToDo
 import com.nureddinelmas.todoapp.viewModel.FragmentSharedViewModel
@@ -25,17 +32,17 @@ class AddFragment : Fragment() {
     private val dToDoViewModel : ToDoViewModel by viewModels()
     private val dFragmentSharedViewModel: FragmentSharedViewModel by viewModels()
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    private var dateFormat = SimpleDateFormat("dd MMM, YYYY", Locale.US)
-    private var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
+
+
+   // private var dateFormat = SimpleDateFormat("dd MMM, YYYY", Locale.US)
+    // private var timeFormat = SimpleDateFormat("hh:mm a", Locale.US)
     private lateinit var lastDate: Date
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_add, container, false)
-
+        activity?.title = "Add New Todo"
         setHasOptionsMenu(true)
 
         view.spinnerType.onItemSelectedListener = dFragmentSharedViewModel.listener
@@ -85,12 +92,17 @@ class AddFragment : Fragment() {
                 dDescription
             )
             dToDoViewModel.insertData(newData)
+
+            dFragmentSharedViewModel.setAlarm(newData)
+
             Toast.makeText(requireContext(), "Succesfully added", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), "UnSuccesfully!", Toast.LENGTH_LONG).show()
         }
     }
+
+
 
 
     fun getDate (){

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,11 +29,13 @@ class UpdateFragment : Fragment() {
     private val args by navArgs<UpdateFragmentArgs>()
     private val dSharedViewModel : FragmentSharedViewModel by viewModels()
     private val dToDoViewModel: ToDoViewModel by viewModels()
+    private val dFragmentSharedViewModel: FragmentSharedViewModel by viewModels()
 
     private lateinit var lastDate: Date
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -43,7 +46,6 @@ class UpdateFragment : Fragment() {
       val view = inflater.inflate(R.layout.fragment_update, container, false)
         setHasOptionsMenu(true)
 
-        Log.d("!!!", args.currentItem.title)
         lastDate = Date(args.currentItem.reminderDate.toString())
         view.updateTitleText.setText(args.currentItem.title)
         view.updateButtonTimeDate.text = args.currentItem.reminderDate.toString()
@@ -51,10 +53,6 @@ class UpdateFragment : Fragment() {
         view.updateSpinnerType.setSelection(dSharedViewModel.parsePriority(args.currentItem.period))
         view.updateSpinnerType.onItemSelectedListener = dSharedViewModel.listener
 
-
-        Log.d("!!!", lastDate.toString())
-
-        // Inflate the layout for this fragment
         return view
     }
 
@@ -90,6 +88,7 @@ class UpdateFragment : Fragment() {
         if (dSharedViewModel.isDataOk(title, description)){
             val updateItem = ToDo(args.currentItem.id,title, dSharedViewModel.parsePriority(getPeriod),updateDate,description)
             dToDoViewModel.updateData(updateItem)
+            dFragmentSharedViewModel.setAlarm(updateItem)
             view?.findNavController()?.navigate(R.id.action_updateFragment_to_listFragment)
 
         }
@@ -114,7 +113,7 @@ class UpdateFragment : Fragment() {
             val time = TimePickerDialog(requireContext(), { view, hourOfDay, minute ->
                 newDate[year, month, dayOfMonth, hourOfDay, minute] = 0
                 val tem = Calendar.getInstance()
-                Log.w("TIME", System.currentTimeMillis().toString() + "")
+
                 if (newDate.timeInMillis - tem.timeInMillis > 0){
                     Log.d("!!!", newDate.time.toString())
                   //  buttonTimeDate.setText(newDate.time.toString())
